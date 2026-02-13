@@ -1,10 +1,7 @@
 import employee
 from employee import Employee
 
-
-
-
-#While loop that will be running until the user hits option 5.
+# While loop that will be running until the user hits option 5.
 while True:
     print("*****************************************")
     print("\n ***** Welcome to Employee Manager System: ****** \n")
@@ -15,11 +12,11 @@ while True:
     print("4. Delete employee")
     print("5. Exit \n")
 
-#I am using a Try Exception in order to catch user input error and avoid my program breaks
+    # I am using a Try Exception in order to catch user input error and avoid my program breaks
     try:
         option = int(input("What would you like to do?: "))
 
-        #Condition validation that will lead the user through the options available
+        # Condition validation that will lead the user through the options available
         if option == 1:
             print("Ok...Let's add a new employee in the system")
             name = input("What is the employee name? ")
@@ -45,39 +42,46 @@ while True:
                     back = False
 
         elif option == 3:
-            update_employee = {
-            "name": "",
-            "age": "",
-            "position": "",
-            "salary": "",
-            "location": "",
-            "department": "",
-            }
-            employee_id = input("What is the employee id? ")
-            information_to_update = input("What information do you want to update?")
 
-            match information_to_update:
+            back = True
+
+            # Transforming ID into a number since my JSON receives a number
+            try:
+                employee_id = int(input("What is the employee id? "))
+            except ValueError:
+                print("ID must be a number")
+
+            field_to_update = input("What information do you want to update?").lower()
+
+            value_to_update = ""
+
+            match field_to_update:
                 case "name":
-                    new_employee_name = input("What is the employee name? ")
-                    update_employee["name"] = new_employee_name
-
+                    value_to_update = input("Enter the new name? ")
                 case "age":
-                    update_employee["age"] = information_to_update
+                    value_to_update = input("Enter the new age")
                 case "position":
-                    update_employee["position"] = information_to_update
+                    value_to_update = input("Enter the new position")
                 case "salary":
-                    update_employee["salary"] = information_to_update
+                    value_to_update = input("Enter the new salary")
                 case "location":
-                    update_employee["location"] = information_to_update
+                    value_to_update = input("Enter the new location")
                 case "department":
-                    update_employee["department"] = information_to_update
+                    value_to_update = input("Enter the new department")
                 case _:
-                    print("Please enter with an option available in the menu."
-)
-            Employee.update_employee(employee_id, update_employee)
-            print(" I am here option 3")
+                    print("Please enter with an option available in the menu.")
+                    continue
+
+            while back:
+                Employee.update_employee(employee_id, field_to_update, value_to_update)
+
+                userAnswer = input("Press R to return to the main menu...")
+
+                if userAnswer:
+                    back = False
+
         elif option == 4:
-            #Function that update ticket status
+            # Function that update ticket status
             print(" I am here option 4")
         elif option == 5:
             break

@@ -1,8 +1,5 @@
 import random
-import os
 import json
-
-from main import newEmployee, new_employee_name
 
 
 class Employee:
@@ -17,7 +14,7 @@ class Employee:
         self.employee_location = location
         self.employee_department = department
 
-    #Get Method to transform the employee into a dictionary
+    # Get Method to transform the employee into a dictionary
     def get_employee_object(self):
         employee_id = random.randint(1, 100)
         return {
@@ -30,8 +27,7 @@ class Employee:
             "department": self.employee_department,
         }
 
-
-    #Get Method to get employee name
+    # Get Method to get employee name
     def get_employee_name(self):
         return self.__employee_name
 
@@ -47,7 +43,7 @@ class Employee:
     def get_employee_salary(self):
         return self.__employee_salary
 
-    #Method to crearte and save the employee into a file
+    # Method to crearte and save the employee into a file
 
     def save_employee(self):
         output_file = "Current_Employees.json"
@@ -55,14 +51,14 @@ class Employee:
 
         try:
             with open(output_file, "r") as file:
-                #If there is any file in json, it will convert into python language
+                # If there is any file in json, it will convert into python language
                 employee_data = json.load(file)
-        except (FileNotFoundError,json.JSONDecodeError):
+        except (FileNotFoundError, json.JSONDecodeError):
             employee_data = []
 
         for employee in employee_data:
             if employee["name"] == self.__employee_name and employee["position"] == self.__employee_position:
-                print(f"The {employee["name"]} already exists")
+                print(f"The {employee['name']} already exists")
                 return
 
         current_employee = self.get_employee_object()
@@ -74,7 +70,6 @@ class Employee:
                 print(f"Employee {self.__employee_name} has been saved into the file:  {output_file}")
         except Exception as e:
             print(f"Error while saving employee data: {e}")
-
 
     # Method that display employees
     @staticmethod
@@ -88,50 +83,58 @@ class Employee:
                 else:
                     print("\n--- List of Employees ---")
                     for employee in content:
-                        print(f"ID: {employee["id"]} - Name: {employee['name']} - Age: {employee['age']} - Position: {employee['position']} - Salary: {employee['salary']} - Location: {employee['location']} - Department: {employee['department']}")
+                        print(
+                            f"ID: {employee['id']} - Name: {employee['name']} - Age: {employee['age']} - Position: {employee['position']} - Salary: {employee['salary']} - Location: {employee['location']} - Department: {employee['department']}")
         except FileNotFoundError:
             print("\nNo employee file found. Please add an employee first.\n")
 
+    @staticmethod
+    def update_employee(employee_id, field_to_update, value_to_update):
+        file_name = "Current_Employees.json"
 
-    def update_employee(self, employee_id, update_data: dict):
-
-        new_employee = []
+        # Reading the file
         try:
-            with open("Current_Employees.json", "r") as file:
-                content = json.load(file)
+            with open(file_name, "r") as file:
+                employees_list = json.load(file)
 
-                if not content:
+                if not employees_list:
                     print("Employees are empty")
                     return
-        except FileNotFoundError:
-            print("Employee file not found. Please add an employee first.\n")
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("No employees found to be updated\n")
+            return
 
+        employee_found = False
+        for employee in employees_list:
+
+            if employee["id"] == employee_id:
+                if field_to_update == "name":
+                    employee["name"] = value_to_update
+
+                elif field_to_update == "age":
+                    employee["age"] = value_to_update
+                elif field_to_update == "position":
+                    employee["position"] = value_to_update
+                elif field_to_update == "salary":
+                    employee["salary"] = value_to_update
+                elif field_to_update == "location":
+                    employee["location"] = value_to_update
+                elif field_to_update == "department":
+                    employee["department"] = value_to_update
+
+                print(f"Updated {value_to_update} for ID {employee_id}.")
+                employee_found = True
+                break
+
+        if not employee_found:
+            print(f"Employee with ID {employee_id} not found.")
+            return
+
+        # Saving employee into the file
         try:
-            with open("Current_Employees.json", "r") as file:
-                content = json.load(file)
+            with open(file_name, "w") as file:
+                json.dump(employees_list, file, indent=4)
 
-                # TODO: Check how to populate the new opject to save it into the file
-
-                if employee_id == content["id"]:
-                    current_employee = self.get_employee_object()
-                    new_employee.append(current_employee)
-
-                    for employee in content:
-                        if update_data["name"] != "":
-                            employee.get_employee_name(update_data["name"])
-                        if update_data["age"] != "":
-                            employee.get_employee_age(update_data["age"])
-                        if update_data["salary"] != "":
-                            employee.get_employee_salary(update_data["salary"])
-                        if update_data["position"] != "":
-                            employee.get_employee_position(update_data["position"])
-                        if update_data["department"] != "":
-                            employee["department"] = update_data["department"]
-                        if update_data["location"] != "":
-                            employee["location"] = update_data["location"]
-                print("Employee updated successfully")
-
-
-        except FileNotFoundError:
-            print("Employee file not found. Please add an employee first.\n")
-
+            print("Employee updated successfully")
+        except Exception as e:
+            print(f"Error saving file: {e}")

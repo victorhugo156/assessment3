@@ -1,7 +1,7 @@
 [
     {
         "id": 88,
-        "name": "victor",
+        "name": "John",
         "age": "45",
         "position": "manager",
         "salary": "5000",
@@ -10,8 +10,8 @@
     },
     {
         "id": 22,
-        "name": "marcos",
-        "age": "34",
+        "name": "luise",
+        "age": "33",
         "position": "developer jr",
         "salary": "20",
         "location": "malbourne",
