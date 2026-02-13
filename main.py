@@ -1,9 +1,87 @@
 import employee
-import os
+from employee import Employee
 
-employee1 = employee.Employee()
 
-employee1.add_employee("Victor", 45, "manager", 50, "Sydney", "Marketing")
 
-employee1.display_employees()
 
+#While loop that will be running until the user hits option 5.
+while True:
+    print("*****************************************")
+    print("\n ***** Welcome to Employee Manager System: ****** \n")
+    print("***************************************** \n")
+    print("1. Add a new employee in the system")
+    print("2. Display all employees")
+    print("3. Update any employee information")
+    print("4. Delete employee")
+    print("5. Exit \n")
+
+#I am using a Try Exception in order to catch user input error and avoid my program breaks
+    try:
+        option = int(input("What would you like to do?: "))
+
+        #Condition validation that will lead the user through the options available
+        if option == 1:
+            print("Ok...Let's add a new employee in the system")
+            name = input("What is the employee name? ")
+            age = input("What is the employee age? ")
+            position = input("What is the employee position? ")
+            salary = input("What is the employee salary? ")
+            location = input("Where is the employee based? ")
+            department = input("What is the employee department?")
+
+            newEmployee = employee.Employee(name, age, position, salary, location, department)
+            newEmployee.save_employee()
+
+        elif option == 2:
+            back = True
+
+            while back:
+                # Function that display all employees
+                employee.Employee.display_employees()
+
+                userAnswer = input("Press R to return to the main menu...")
+
+                if userAnswer:
+                    back = False
+
+        elif option == 3:
+            update_employee = {
+            "name": "",
+            "age": "",
+            "position": "",
+            "salary": "",
+            "location": "",
+            "department": "",
+            }
+            employee_id = input("What is the employee id? ")
+            information_to_update = input("What information do you want to update?")
+
+            match information_to_update:
+                case "name":
+                    new_employee_name = input("What is the employee name? ")
+                    update_employee["name"] = new_employee_name
+
+                case "age":
+                    update_employee["age"] = information_to_update
+                case "position":
+                    update_employee["position"] = information_to_update
+                case "salary":
+                    update_employee["salary"] = information_to_update
+                case "location":
+                    update_employee["location"] = information_to_update
+                case "department":
+                    update_employee["department"] = information_to_update
+                case _:
+                    print("Please enter with an option available in the menu."
+)
+            Employee.update_employee(employee_id, update_employee)
+            print(" I am here option 3")
+        elif option == 4:
+            #Function that update ticket status
+            print(" I am here option 4")
+        elif option == 5:
+            break
+    except ValueError:
+        print("Please enter with an option available in the menu.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")

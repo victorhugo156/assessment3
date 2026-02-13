@@ -1,0 +1,20 @@
+[
+    {
+        "id": 88,
+        "name": "victor",
+        "age": "45",
+        "position": "manager",
+        "salary": "5000",
+        "location": "sydney",
+        "department": "marketing"
+    },
+    {
+        "id": 22,
+        "name": "marcos",
+        "age": "34",
+        "position": "developer jr",
+        "salary": "20",
+        "location": "malbourne",
+        "department": "IT"
+    }
+]
