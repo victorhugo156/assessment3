@@ -209,3 +209,37 @@ class Employee:
         if not employee_found:
             print(f"Employee: {employee_name} not found.")
             return
+
+    @staticmethod
+    def sort_employee_list(user_input):
+        file_name = "Current_Employees.json"
+
+        # Reading the file
+        try:
+            with open(file_name, "r") as file:
+                employees_list = json.load(file)
+
+                if not employees_list:
+                    print("Employees are empty")
+                    return
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("No employees found to be updated\n")
+            return
+
+        try:
+            if user_input == "salary":
+                employees_list.sort(key=lambda x: float(x["salary"]), reverse=True)
+                print("\n--- Employees Sorted by Salary (High to Low) ---")
+            elif user_input == "position":
+                employees_list.sort(key=lambda x: x["salary"].lower())
+                print("\n--- Employees Sorted by Position (A-Z) ---")
+            else:
+                print("Invalid sort criteria")
+                return
+
+            for employee in employees_list:
+                print(employee)
+        except KeyError as e:
+            print(f"Error: One of the employees is missing the data key: {e}")
+        except ValueError:
+            print("Error: Could not sort. Make sure Salary is saved as a number, not text.")

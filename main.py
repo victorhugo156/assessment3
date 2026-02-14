@@ -116,7 +116,18 @@ while True:
                     back = False
 
         elif option == 6:
-            print("hey")
+            back = True
+            print("Type salary, if you would like to sort the employee list by salary")
+            print("Type position, if you would like to sort the employee list by position\n")
+            user_input = input("")
+
+            while back:
+                Employee.sort_employee_list(user_input)
+
+                userAnswer = input("Press R to return to the main menu...")
+
+                if userAnswer:
+                    back = False
 
         elif option == 7:
             break
