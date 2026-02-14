@@ -138,3 +138,74 @@ class Employee:
             print("Employee updated successfully")
         except Exception as e:
             print(f"Error saving file: {e}")
+
+    @staticmethod
+    def delete_employee(employee_id, employee_name):
+        file_name = "Current_Employees.json"
+
+        # Reading the file
+        try:
+            with open(file_name, "r") as file:
+                employees_list = json.load(file)
+
+                if not employees_list:
+                    print("Employees are empty")
+                    return
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("No employees found to be updated\n")
+            return
+
+        employee_found = False
+
+        for employee in employees_list:
+
+            if employee["id"] == employee_id:
+
+                user_confirmation = input(f"Type YES if you want to delete the employee\n{employee}\n or type NO if "
+                                          f"you want to return").lower()
+                if user_confirmation == "yes":
+                    employees_list.remove(employee)
+                    print(f"Employee: {employee_name} has been deleted")
+                    employee_found = True
+                    break
+                else:
+                    return
+
+        if not employee_found:
+            print(f"Employee with ID {employee_id} not found.")
+            return
+
+        try:
+            with open(file_name, "w") as file:
+                json.dump(employees_list, file, indent=4)
+            print("Data Base has been updated successfully.")
+        except Exception as e:
+            print(f"Error saving file: {e}")
+
+    @staticmethod
+    def search_employee(employee_name):
+        file_name = "Current_Employees.json"
+
+        # Reading the file
+        try:
+            with open(file_name, "r") as file:
+                employees_list = json.load(file)
+
+                if not employees_list:
+                    print("Employees are empty")
+                    return
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("No employees found to be updated\n")
+            return
+
+        employee_found = False
+
+        for employee in employees_list:
+
+            if employee["name"] == employee_name:
+                print(f"Employee: {employee} has been deleted")
+                employee_found = True
+
+        if not employee_found:
+            print(f"Employee: {employee_name} not found.")
+            return

@@ -10,7 +10,9 @@ while True:
     print("2. Display all employees")
     print("3. Update any employee information")
     print("4. Delete employee")
-    print("5. Exit \n")
+    print("5. Search Employee")
+    print("6. Sort the employees list")
+    print("7. Exit \n")
 
     # I am using a Try Exception in order to catch user input error and avoid my program breaks
     try:
@@ -81,10 +83,44 @@ while True:
                     back = False
 
         elif option == 4:
-            # Function that update ticket status
-            print(" I am here option 4")
+            back = True
+
+            # Transforming ID into a number since my JSON receives a number
+            try:
+                employee_id = int(input("What is the employee id to be deleted? "))
+                employee_name = input("What is the employee name to be deleted? ")
+
+            except ValueError:
+                print("ID must be a number")
+
+            while back:
+                Employee.delete_employee(employee_id, employee_name)
+
+                userAnswer = input("Press R to return to the main menu...")
+
+                if userAnswer:
+                    back = False
+
         elif option == 5:
+
+            back = True
+
+            employee_name = input("What is the employee name you want to find? ")
+
+            while back:
+                Employee.search_employee(employee_name)
+
+                userAnswer = input("Press R to return to the main menu...")
+
+                if userAnswer:
+                    back = False
+
+        elif option == 6:
+            print("hey")
+
+        elif option == 7:
             break
+
     except ValueError:
         print("Please enter with an option available in the menu.")
     except Exception as e:
