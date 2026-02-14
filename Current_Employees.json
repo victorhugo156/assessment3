@@ -1,56 +1,11 @@
 [
     {
-        "id": 88,
-        "name": "John",
+        "id": 51,
+        "name": "Victor",
         "age": "45",
-        "position": "manager",
-        "salary": "5000",
-        "location": "sydney",
-        "department": "marketing"
-    },
-    {
-        "id": 25,
-        "name": "bruno",
-        "age": "34",
-        "position": "marketing jr",
-        "salary": "5000",
-        "location": "perth",
-        "department": "marketing"
-    },
-    {
-        "id": 9,
-        "name": "james",
-        "age": "56",
-        "position": "CEO",
-        "salary": "10000",
-        "location": "sydney",
-        "department": "Chief of the company"
-    },
-    {
-        "id": 81,
-        "name": "Luise",
-        "age": "23",
-        "position": "intern",
-        "salary": "30000",
-        "location": "Gold COast",
-        "department": "finance"
-    },
-    {
-        "id": 83,
-        "name": "Livia",
-        "age": "34",
-        "position": "senior engineering",
-        "salary": "4000",
-        "location": "sydney",
-        "department": "bruni"
-    },
-    {
-        "id": 67,
-        "name": "bruno",
-        "age": "56",
-        "position": "senior dev",
+        "position": "dev junior",
         "salary": "50000",
         "location": "sydney",
-        "department": "it"
+        "department": "IT"
     }
 ]

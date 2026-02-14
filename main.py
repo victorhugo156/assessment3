@@ -3,9 +3,9 @@ from employee import Employee
 
 # While loop that will be running until the user hits option 5.
 while True:
-    print("*****************************************")
+    print("***************************************************")
     print("\n ***** Welcome to Employee Manager System: ****** \n")
-    print("***************************************** \n")
+    print("*************************************************** \n")
     print("1. Add a new employee in the system")
     print("2. Display all employees")
     print("3. Update any employee information")

@@ -231,7 +231,7 @@ class Employee:
                 employees_list.sort(key=lambda x: float(x["salary"]), reverse=True)
                 print("\n--- Employees Sorted by Salary (High to Low) ---")
             elif user_input == "position":
-                employees_list.sort(key=lambda x: x["salary"].lower())
+                employees_list.sort(key=lambda x: x["position"].lower())
                 print("\n--- Employees Sorted by Position (A-Z) ---")
             else:
                 print("Invalid sort criteria")
